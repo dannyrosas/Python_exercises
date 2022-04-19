@@ -1,8 +1,64 @@
-from pickle import FALSE
 import random 
-import os,sys
+import os
 
 alphabet=["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
+HANGMANPICS = ['''
+  +---+
+  |   |
+      |
+      |
+      |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+      |
+      |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+  |   |
+      |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+ /|   |
+      |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+ /|\  |
+      |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ /    |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ / \  |
+      |
+=========''','''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ / \  |
+      |
+=========''']
 
 def select():
     a=random.randint(0,214)
@@ -12,7 +68,7 @@ def select():
         word.pop()
         del words     
     return word    
-
+hangman=0
 lives=8
 word=select()
 print(word)
@@ -43,11 +99,14 @@ while space_word != word:
                 if letter==word[i]:space_word[i]=letter
         else:
             lives-=1
+            hangman+=1
 
     os.system("cls")
+    if hangman>0 and hangman<8:print(HANGMANPICS[hangman-1])
     if space_word == word:
         for i in range (0,b): print(space_word[i],end=" ")
         print("\n \n ¡CONGRATULATIONS!")
     if lives==0:
-        print("¡you lose the game!")
+        print(HANGMANPICS[7])
+        print("GAME OVER!!!!")
         break
